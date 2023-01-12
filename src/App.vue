@@ -1,17 +1,21 @@
 <template>
   <HelloWorld />
-  <ShoperPdf />
+  <!-- <AnotherSlider /> -->
+  <!-- <SocialStreamSlice /> -->
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import ShoperPdf from "./components/ShoperPdf.vue";
+// import AnotherSlider from "./components/AnotherSlider.vue";
+// import ShoperPdf from "./components/ShoperPdf.vue";
+// import SocialStreamSlice from "./components/ServicesSlider.vue";
 
 export default {
   name: "App",
   components: {
     HelloWorld,
-    ShoperPdf,
+    // AnotherSlider,
+    // SocialStreamSlice,
   },
 };
 </script>
