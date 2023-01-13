@@ -1,12 +1,11 @@
 <template>
-  <section class="social-stream-section">
+  <section class="social-stream-section global-font-size">
     <div class="social-stream-carousel">
       <div ref="carouselViewport" id="carousel" class="carousel-viewport transition">
         <div
           class="carousel-item cursor-pointer transition"
           v-for="(item, index) in socialStreamData"
           :key="index"
-          :style="{ 'margin-top': index % 2 == 0 ? '6rem' : '0' }"
         >
           <div class="parent-div">
             <div class="image-container">
@@ -32,7 +31,7 @@
         <span
           v-for="(item, index) in socialStreamData"
           :key="index"
-          @click="scrollToIndexOnMobile(index)"
+          @click="scrollToIndex(index)"
           :class="{ active: index === currentIndex }"
         ></span>
       </div>
@@ -49,44 +48,49 @@ export default {
     return {
       isMobile: false,
       currentIndex: 1,
+       ITEMS_PER_PAGE: 3.6,
+      ALL_ITEMS_SCROLL_WIDTH: 31.17,
       socialStreamData: [
         {
           id: 1,
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
         {
           id: 2,
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
         {
           id: 3,
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
         {
           id: 4,
 
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
         {
           id: 5,
 
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
         {
           id: 6,
 
           message:
-            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem exercitationem deserunt nostrum facere corporis! Accusamus eligendi, aliquid doloribus sapiente corporis id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
+            "hello 123 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus voluptate voluptatem quidem  deserunt nostrum facere! Accusamus eligendi, aliquid doloribus sapiente id ipsa numquam voluptates illum iusto voluptate explicabo incidunt totam cupiditate? from message",
         },
       ],
     };
   },
   mounted() {
+    this.scrollToIndex(0)
+    this.addWindowResizeEventListener()
+    this.checkScreenWidth()
     if (window.innerWidth < 630) {
       this.isMobile = true;
     }
@@ -97,36 +101,73 @@ export default {
 
   methods: {
     // *********show  just one item in the DOM
-    scrollToIndexOnMobile(index) {
-      this.currentIndex = index;
-      const carousel = document.querySelector("#carousel");
-      console.log(carousel, index, "button clieck");
-      carousel.scrollTo({
-        left: index * carousel.offsetWidth,
-        behavior: "smooth",
-      });
+    // scrollToIndexOnMobile(index) {
+    //   this.currentIndex = index;
+    //   const carousel = document.querySelector("#carousel");
+    //   console.log(carousel, index, "button clieck");
+    //   carousel.scrollTo({
+    //     left: index * carousel.offsetWidth,
+    //     behavior: "smooth",
+    //   });
+    // },
+    scrollToIndex(index) {
+      this.currentIndex = index
+      const carousel = this.$refs.carouselViewport
+      carousel.style.transform = `translateX(-${this.ALL_ITEMS_SCROLL_WIDTH * index}%)`
     },
+    addWindowResizeEventListener() {
+
+      window.addEventListener("resize", () => {
+        this.checkScreenWidth()
+      });
+
+
+      },
+
+      checkScreenWidth() {
+      if (window.innerWidth < 599) {
+        this.ITEMS_PER_PAGE = 1.4
+        this.ALL_ITEMS_SCROLL_WIDTH = 72.62
+      }
+
+      if (window.innerWidth > 599 && window.innerWidth < 900) {
+        this.ITEMS_PER_PAGE = 2.5
+        this.ALL_ITEMS_SCROLL_WIDTH = 41.6
+      }
+
+      if (window.innerWidth > 900) {
+        this.ITEMS_PER_PAGE = 3.6
+        this.ALL_ITEMS_SCROLL_WIDTH = 31.17
+      }
+
+      },
+
   },
 };
 </script>
 
 <style scoped>
+
+.global-font-size {
+    font-size: 10px;
+  }
+
 #dot-navigation {
   display: flex;
   justify-content: center;
-  margin-top: 63rem;
+  margin-top: 65rem;
   position: absolute;
   color: blue;
   z-index: 9999;
   width: 100%;
-  height: 1rem;
+  height: 2.6rem;
   align-items: center;
 }
 
 #dot-navigation span {
   display: inline-block;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 1.3rem;
+  height: 1.3rem;
   background-color: rgb(90, 72, 72);
   border-radius: 50%;
   margin: 0 0.25rem;
@@ -137,21 +178,22 @@ export default {
   background-color: rgb(36, 25, 25);
 }
 .social-stream-carousel {
-  margin-top: 9rem;
+  margin-top: 14.4rem;
   display: flex;
+  justify-content: end;
   overflow-x: hidden;
   overflow-y: hidden;
   position: relative;
-  height: 70rem;
+  height: 118.4rem;
 }
 
 .social-stream-carousel .carousel-viewport {
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 60%;
+  width: 80%;
   position: relative;
-  margin: 2rem;
-  padding: 3rem;
+  margin: 3.2rem;
+  padding: 4.8rem;
   float: left;
   left: 0;
   overflow: hidden;
@@ -167,13 +209,12 @@ export default {
   position: relative;
   width: 27.77%;
   height: auto;
-  overflow: auto;
 
   /* margin: 0 2.5rem 0 2.5rem; */
 }
 .carousel-item {
-  max-width: 28rem;
-  min-width: 28rem;
+  max-width: 31.8rem;
+  min-width: 31.8rem;
 }
 .overlay {
   position: absolute;
@@ -194,9 +235,9 @@ export default {
 }
 .text-service {
   color: white;
-  font-size: 1rem;
+  font-size: 1.6rem;
   position: absolute;
-  top: 40%;
+  top: 38%;
   left: 40%;
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -206,7 +247,7 @@ export default {
 }
 .text-description {
   color: white;
-  font-size: 1rem;
+  font-size: 1.6rem;
   position: absolute;
   top: 60%;
   left: 50%;
@@ -219,15 +260,16 @@ export default {
 .parent-div {
   background: url("https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1");
   /* max-width: 28rem; */
-  height: 33rem;
+  max-height: 36.6rem;
+  min-height: 36.6rem;
   /* object-fit: cover; */
   overflow: hidden;
   position: relative;
-  margin: 2rem;
+  margin: 1rem;
 }
 .social-stream-carousel .carousel-viewport .carousel-item .parent-div .image-container {
   /* background: url("https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616__340.jpg"); */
-  max-width: 85%;
+  max-width: 100%;
   max-height: 70%;
   margin: auto;
   position: absolute;
@@ -265,8 +307,8 @@ export default {
 
 ::-webkit-scrollbar-thumb {
   background-color: #818b99;
-  border: 3px solid transparent;
-  border-radius: 9px;
+  border: 0.3rem solid transparent;
+  border-radius: 0.9rem;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -277,14 +319,14 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(244, 0, 0);
+  background-color: rgb(227, 235, 10);
 }
 
 ::-webkit-scrollbar-track-piece:end {
-  margin-right: 1rem;
+  margin-right: 1.6rem;
 }
 ::-webkit-scrollbar-track-piece:start {
-  margin-left: 55rem;
+  margin-left: 88rem;
 }
 
 .social-stream-carousel
@@ -292,80 +334,104 @@ export default {
   .carousel-item
   .carousel-item-info
   .carousel-item-description {
-  margin-top: 0.8rem;
+  margin-top: 0.2rem;
   font-family: sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   font-weight: 400;
-  max-width: 22.5rem;
-  min-width: 22.5rem;
-  line-height: 1.2;
+  max-width: 29.12rem;
+  min-width: 29.12rem;
+  /* line-height: 1.2rem; */
   color: black;
-  padding-left: 2rem;
+  padding-left: 1.6rem;
 }
 
 @media only screen and (min-width: 630px) {
   .social-stream-carousel {
     overflow: auto;
-    height: 70rem;
+    height: 112rem;
   }
+  .carousel-item:nth-child(odd) {
+  /* position every odd numbered item up by 1rem */
+    margin-top: 9.6rem;
+}
   .carousel-viewport {
     overflow: auto !important;
   }
   .social-stream-carousel .carousel-viewport .carousel-item {
     /* flex: 0 0 calc(100% / 1.4); */
-    max-width: 28rem;
-    min-width: 28rem;
+    max-width: 31.8rem;
+    min-width: 31.8rem;
   }
   .social-stream-carousel .carousel-viewport .carousel-item .image-container {
     width: 100%;
-    height: 26.8rem;
+    height: 42.8rem;
   }
   .social-stream-carousel .carousel-viewport .carousel-item .carousel-item-info {
     opacity: 1;
     margin-top: 0.84rem;
     padding-top: 0.31rem;
-    max-width: 23rem;
+    max-width: 36rem;
   }
   .social-stream-carousel
     .carousel-viewport
     .carousel-item
     .carousel-item-info
     .carousel-item-eye-icon {
-    width: 2.4rem;
-    height: 1.6rem;
+    width: 3.84rem;
+    height: 2.56rem;
   }
   .social-stream-carousel
     .carousel-viewport
     .carousel-item
     .carousel-item-info
     .carousel-item-description {
-    margin-top: 0.8rem;
+    margin-top: 0.2rem;
     font-family: sans-serif;
     font-size: 1.6rem;
     font-weight: 300;
-    line-height: 1.44;
+    /* line-height: 1.44; */
     color: black;
   }
 }
 
 @media only screen and (max-width: 1200px) {
   ::-webkit-scrollbar-track-piece:start {
-    margin-left: 25rem;
+    margin-left: 40rem;
   }
 }
 @media only screen and (max-width: 900px) {
   ::-webkit-scrollbar-track-piece:start {
-    margin-left: 10rem;
+    margin-left: 16rem;
   }
 }
 @media only screen and (min-width: 400px) {
   .social-stream-carousel {
-    margin-top: 4.2rem;
-    height: 68rem;
+    margin-top: 6.72rem;
+    height: 124.8rem;
   }
 }
-.carousel-item:nth-child(odd) {
-  /* position every odd numbered item up by 1rem */
-  margin-top: 3rem;
+@media only screen and (max-width: 550px) {
+  .carousel-item {
+  max-width: 30rem;
+  min-width: 30rem;
 }
+.parent-div{
+  height: 38.6rem;
+  margin: 2rem;
+}
+
+.social-stream-carousel .carousel-viewport .carousel-item .carousel-item-info .carousel-item-description
+{
+    max-width: 31.68rem;
+    min-width: 31.68rem;
+}
+.social-stream-carousel .carousel-viewport {
+
+  height: 70%;
+  width: 70%;
+  overflow: hidden;
+
+}
+}
+
 </style>
