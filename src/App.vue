@@ -1,11 +1,11 @@
 <template>
-  <HelloWorld />
+  <ImageGallery />
   <!-- <AnotherSlider /> -->
   <!-- <SocialStreamSlice /> -->
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import ImageGallery from "./components/ImageGallery.vue";
 // import AnotherSlider from "./components/AnotherSlider.vue";
 // import ShoperPdf from "./components/ShoperPdf.vue";
 // import SocialStreamSlice from "./components/ServicesSlider.vue";
@@ -13,7 +13,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    ImageGallery,
     // AnotherSlider,
     // SocialStreamSlice,
   },

@@ -101,15 +101,15 @@ export default {
 
   methods: {
     // *********show  just one item in the DOM
-    // scrollToIndexOnMobile(index) {
-    //   this.currentIndex = index;
-    //   const carousel = document.querySelector("#carousel");
-    //   console.log(carousel, index, "button clieck");
-    //   carousel.scrollTo({
-    //     left: index * carousel.offsetWidth,
-    //     behavior: "smooth",
-    //   });
-    // },
+    scrollToIndexOnMobile(index) {
+      this.currentIndex = index;
+      const carousel = document.querySelector("#carousel");
+      console.log(carousel, index, "button clieck");
+      carousel.scrollTo({
+        left: index * carousel.offsetWidth,
+        behavior: "smooth",
+      });
+    },
     scrollToIndex(index) {
       this.currentIndex = index
       const carousel = this.$refs.carouselViewport
@@ -155,19 +155,19 @@ export default {
 #dot-navigation {
   display: flex;
   justify-content: center;
-  margin-top: 65rem;
+  margin-top: 74rem;
   position: absolute;
   color: blue;
   z-index: 9999;
   width: 100%;
-  height: 2.6rem;
+  height: 1.6rem;
   align-items: center;
 }
 
 #dot-navigation span {
   display: inline-block;
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 0.8rem;
+  height: 0.8rem;
   background-color: rgb(90, 72, 72);
   border-radius: 50%;
   margin: 0 0.25rem;
@@ -181,7 +181,7 @@ export default {
   margin-top: 14.4rem;
   display: flex;
   justify-content: end;
-  overflow-x: hidden;
+  overflow-x: scroll;
   overflow-y: hidden;
   position: relative;
   height: 118.4rem;
@@ -189,14 +189,14 @@ export default {
 
 .social-stream-carousel .carousel-viewport {
   display: flex;
-  height: 60%;
+  height: 62%;
   width: 80%;
   position: relative;
   margin: 3.2rem;
   padding: 4.8rem;
   float: left;
   left: 0;
-  overflow: hidden;
+  overflow: scroll;
   transform: translateX(0);
   pointer-events: fill;
   cursor: grab;
@@ -205,12 +205,9 @@ export default {
 }
 .social-stream-carousel .carousel-viewport .carousel-item {
   flex: 0 0 calc(100% / 3.6);
-  /* show 3 items per row */
   position: relative;
   width: 27.77%;
   height: auto;
-
-  /* margin: 0 2.5rem 0 2.5rem; */
 }
 .carousel-item {
   max-width: 31.8rem;
@@ -259,16 +256,13 @@ export default {
 }
 .parent-div {
   background: url("https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1");
-  /* max-width: 28rem; */
-  max-height: 36.6rem;
-  min-height: 36.6rem;
-  /* object-fit: cover; */
+  max-height: 42.6rem;
+  min-height: 42.6rem;
   overflow: hidden;
   position: relative;
   margin: 1rem;
 }
 .social-stream-carousel .carousel-viewport .carousel-item .parent-div .image-container {
-  /* background: url("https://cdn.pixabay.com/photo/2016/11/29/05/45/astronomy-1867616__340.jpg"); */
   max-width: 100%;
   max-height: 70%;
   margin: auto;
@@ -304,6 +298,10 @@ export default {
   top: 0;
   bottom: 0;
 }
+.carousel-item:nth-child(even) {
+  /* position every odd numbered item up by 1rem */
+    margin-top: 11.2rem;
+}
 
 ::-webkit-scrollbar-thumb {
   background-color: #818b99;
@@ -319,7 +317,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(227, 235, 10);
+  background-color: #f1dd38;
 }
 
 ::-webkit-scrollbar-track-piece:end {
@@ -340,98 +338,14 @@ export default {
   font-weight: 400;
   max-width: 29.12rem;
   min-width: 29.12rem;
-  /* line-height: 1.2rem; */
   color: black;
   padding-left: 1.6rem;
 }
-
-@media only screen and (min-width: 630px) {
-  .social-stream-carousel {
-    overflow: auto;
-    height: 112rem;
+  @media screen and (max-width: 580px) {
+    .carousel-item:nth-child(even) {
+    /* position every odd numbered item up by 1rem */
+      margin-top: 0rem;
   }
-  .carousel-item:nth-child(odd) {
-  /* position every odd numbered item up by 1rem */
-    margin-top: 9.6rem;
-}
-  .carousel-viewport {
-    overflow: auto !important;
-  }
-  .social-stream-carousel .carousel-viewport .carousel-item {
-    /* flex: 0 0 calc(100% / 1.4); */
-    max-width: 31.8rem;
-    min-width: 31.8rem;
-  }
-  .social-stream-carousel .carousel-viewport .carousel-item .image-container {
-    width: 100%;
-    height: 42.8rem;
-  }
-  .social-stream-carousel .carousel-viewport .carousel-item .carousel-item-info {
-    opacity: 1;
-    margin-top: 0.84rem;
-    padding-top: 0.31rem;
-    max-width: 36rem;
-  }
-  .social-stream-carousel
-    .carousel-viewport
-    .carousel-item
-    .carousel-item-info
-    .carousel-item-eye-icon {
-    width: 3.84rem;
-    height: 2.56rem;
-  }
-  .social-stream-carousel
-    .carousel-viewport
-    .carousel-item
-    .carousel-item-info
-    .carousel-item-description {
-    margin-top: 0.2rem;
-    font-family: sans-serif;
-    font-size: 1.6rem;
-    font-weight: 300;
-    /* line-height: 1.44; */
-    color: black;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  ::-webkit-scrollbar-track-piece:start {
-    margin-left: 40rem;
-  }
-}
-@media only screen and (max-width: 900px) {
-  ::-webkit-scrollbar-track-piece:start {
-    margin-left: 16rem;
-  }
-}
-@media only screen and (min-width: 400px) {
-  .social-stream-carousel {
-    margin-top: 6.72rem;
-    height: 124.8rem;
-  }
-}
-@media only screen and (max-width: 550px) {
-  .carousel-item {
-  max-width: 30rem;
-  min-width: 30rem;
-}
-.parent-div{
-  height: 38.6rem;
-  margin: 2rem;
-}
-
-.social-stream-carousel .carousel-viewport .carousel-item .carousel-item-info .carousel-item-description
-{
-    max-width: 31.68rem;
-    min-width: 31.68rem;
-}
-.social-stream-carousel .carousel-viewport {
-
-  height: 70%;
-  width: 70%;
-  overflow: hidden;
 
 }
-}
-
 </style>
