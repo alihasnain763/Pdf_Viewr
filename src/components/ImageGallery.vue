@@ -1,61 +1,119 @@
 <template>
-    <div>
-        <div class="gallery-image-container">
-            <div class="image-gallery" >
-                
-            <img
-            v-for="(item, index) in Images" :key="index"
-             :src="item" :alt="index">
-           
-            </div>
-
-        </div>
+  <!-- <div class="gallery-image-container">
+    <div class="jumbo">
+      <ul>
+        <li v-for="(item, index) in Images" :key="index">
+          <img :src="item" :alt="index" />
+        </li>
+      </ul>
     </div>
+  </div> -->
+
+  <ul class="image-gallery">
+    <li v-for="(item, index) in Images" :key="index">
+      <img :src="item" alt="" />
+    </li>
+    <!-- other items here -->
+  </ul>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            Images: [
-                
-                    "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
-                    "https://thumbs.dreamstime.com/b/night-landscape-colorful-milky-way-yellow-light-mountains-starry-sky-hills-summer-beautiful-universe-space-72956059.jpg",
-                    "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
-                    "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864%2C0%2C1728%2C2304&wid=600&hei=800&scl=2.88",
-                    "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
-                    "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
-                    "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
-                
-            ]
-        }
-    }
-}
+  data() {
+    return {
+      Images: [
+        "https://source.unsplash.com/random/?tech,event",
+        "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864%2C0%2C1728%2C2304&wid=600&hei=800&scl=2.88",
+        "https://source.unsplash.com/random/?tech,eight",
+        "https://source.unsplash.com/random/?tech,eight",
+        "https://source.unsplash.com/random/?tech,yet",
+        "https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/WOPA160517_D056-resized.jpg?crop=864%2C0%2C1728%2C2304&wid=600&hei=800&scl=2.88",
+        "https://source.unsplash.com/random/?tech,past",
+        "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
+        "https://source.unsplash.com/random/?tech,crew",
+        "https://source.unsplash.com/random/?tech,crew",
+        "https://www.lego.com/cdn/cs/set/assets/blt3be27e7163925b5a/21335-202209-PDP-Hero-XL-Large.jpg?fit=crop&format=jpg&quality=80&width=1600&height=1000&dpr=1",
+        "https://source.unsplash.com/random/?tech,card",
+      ],
+    };
+  },
+  methods: {
+    mainGalleryFunction() {
+      //   var gallery = document.querySelector("#gallery");
+      //   var getVal = function (elem, style) {
+      //     console.log(elem, style);
+      //     return parseInt(window.getComputedStyle(elem).getPropertyValue(style));
+      //   };
+      //   console.log(getVal);
+      //   var getHeight = function (item) {
+      //     return item.querySelector(".content").getBoundingClientRect().height;
+      //   };
+      //   console.log(getHeight);
+      //   var resizeAll = function () {
+      //     var altura = getVal(gallery, "grid-auto-rows");
+      //     var gap = getVal(gallery, "grid-row-gap");
+      //     gallery.querySelectorAll(".gallery-item").forEach(function (item) {
+      //       var el = item;
+      //       el.style.gridRowEnd =
+      //         "span " + Math.ceil((getHeight(item) + gap) / (altura + gap));
+      //     });
+      //   };
+      //   gallery.querySelectorAll("img").forEach(function (item) {
+      //     item.classList.add("byebye");
+      //     if (item.complete) {
+      //       console.log(item.src);
+      //     } else {
+      //       item.addEventListener("load", function () {
+      //         var altura = getVal(gallery, "grid-auto-rows");
+      //         var gap = getVal(gallery, "grid-row-gap");
+      //         var gitem = item.parentElement.parentElement;
+      //         gitem.style.gridRowEnd =
+      //           "span " + Math.ceil((getHeight(gitem) + gap) / (altura + gap));
+      //         item.classList.remove("byebye");
+      //       });
+      //     }
+      //   });
+      //   window.addEventListener("resize", resizeAll);
+      //   gallery.querySelectorAll(".gallery-item").forEach(function (item) {
+      //     item.addEventListener("click", function () {
+      //       item.classList.toggle("full");
+      //     });
+      //   });
+    },
+  },
+  mounted() {
+    this.mainGalleryFunction();
+  },
+};
 </script>
 <style>
-
-.gallery-image-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
 .image-gallery {
   display: flex;
   flex-wrap: wrap;
-  
-  justify-content: space-around;
-  /* align-items: space-betw; */
-
+  gap: 10px;
 }
 
-.image-gallery img {
-  height: 34.7rem;
-  /* width: 100%; */
-  max-width: 1200px;
-  object-fit: contain;
-  margin: 1.5rem;
+.image-gallery > li {
+  height: 300px;
+  cursor: pointer;
+  position: relative;
 }
 
+.image-gallery li img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  border-radius: 5px;
+}
 
+.image-gallery::after {
+  content: "";
+  flex-grow: 999;
+}
+
+.image-gallery > li {
+  flex: 1 1 auto; /* or flex: auto; */
+  /* ... */
+}
 </style>
