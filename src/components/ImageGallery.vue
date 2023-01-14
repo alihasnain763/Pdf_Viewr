@@ -37,53 +37,8 @@ export default {
       ],
     };
   },
-  methods: {
-    mainGalleryFunction() {
-      //   var gallery = document.querySelector("#gallery");
-      //   var getVal = function (elem, style) {
-      //     console.log(elem, style);
-      //     return parseInt(window.getComputedStyle(elem).getPropertyValue(style));
-      //   };
-      //   console.log(getVal);
-      //   var getHeight = function (item) {
-      //     return item.querySelector(".content").getBoundingClientRect().height;
-      //   };
-      //   console.log(getHeight);
-      //   var resizeAll = function () {
-      //     var altura = getVal(gallery, "grid-auto-rows");
-      //     var gap = getVal(gallery, "grid-row-gap");
-      //     gallery.querySelectorAll(".gallery-item").forEach(function (item) {
-      //       var el = item;
-      //       el.style.gridRowEnd =
-      //         "span " + Math.ceil((getHeight(item) + gap) / (altura + gap));
-      //     });
-      //   };
-      //   gallery.querySelectorAll("img").forEach(function (item) {
-      //     item.classList.add("byebye");
-      //     if (item.complete) {
-      //       console.log(item.src);
-      //     } else {
-      //       item.addEventListener("load", function () {
-      //         var altura = getVal(gallery, "grid-auto-rows");
-      //         var gap = getVal(gallery, "grid-row-gap");
-      //         var gitem = item.parentElement.parentElement;
-      //         gitem.style.gridRowEnd =
-      //           "span " + Math.ceil((getHeight(gitem) + gap) / (altura + gap));
-      //         item.classList.remove("byebye");
-      //       });
-      //     }
-      //   });
-      //   window.addEventListener("resize", resizeAll);
-      //   gallery.querySelectorAll(".gallery-item").forEach(function (item) {
-      //     item.addEventListener("click", function () {
-      //       item.classList.toggle("full");
-      //     });
-      //   });
-    },
-  },
-  mounted() {
-    this.mainGalleryFunction();
-  },
+  methods: {},
+  mounted() {},
 };
 </script>
 <style>
@@ -95,25 +50,15 @@ export default {
 
 .image-gallery > li {
   height: 300px;
-  cursor: pointer;
-  position: relative;
 }
 
 .image-gallery li img {
   object-fit: cover;
   width: 100%;
   height: 100%;
-  vertical-align: middle;
-  border-radius: 5px;
-}
-
-.image-gallery::after {
-  content: "";
-  flex-grow: 999;
 }
 
 .image-gallery > li {
-  flex: 1 1 auto; /* or flex: auto; */
-  /* ... */
+  flex: 1 1 auto;
 }
 </style>
